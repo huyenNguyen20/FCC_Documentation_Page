@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/
+</head>
+<body>
+  <header class="main-header">
+    <h1>How does JavaScript work behind the Scence?</h1>
+  </header>
+  <nav id="navbar">
+    <div class="sticky-nav">
+    <header class="nav-header">
+      <h2>Contents</h2>
+    </header>
+      <a class="nav-link" href="#How_is_our_code_executed">How is our code executed </a>
+      <a class="nav-link" href="#Execution_Context_Vs_Execution_Stack">Execution Context Vs Execution Stack </a>
+      <a class="nav-link" href="#Execution_Context_in_Details">Execution Context in Details </a>
+      <a class="nav-link" href="#Creation_Phase_in_Details">Creation Phase in Details </a>
+      <a class="nav-link" href="#Scope_Chain">Scope Chain </a>
+    </div>
+  </nav>
+  <main id="main-doc">
+    <section class="main-section" id="How_is_our_code_executed">
+      <header >
+        <h3>How is our code executed</h3>
+      </header>
+        <h4>JavaScript Engine</h4>
+        <p>
+          JavaScript Code will be executed by a JavaScript Engine. The JavaScript engine is a program that executes JavaScript code such as Google's V8 engine, SpiderMonkey.
+        </p>
+        <h4>Procedure</h4>
+        <p>
+          First, JS code will be parsed by a parser, which check the syntax of the code. Then, the abstraction syntax tree, a data structure, will convert the code into machine code. The machine code will be run by the computer's preprocessor.
+        </p>
+    </section>
+    <section class="main-section" id="Execution_Context_Vs_Execution_Stack">
+      <header>
+        <h3>Execution Context Vs Execution Stack</h3>
+      </header>
+      <h4>Execution context</h4>
+      <p>
+        Execution context is an environment where the code is run. That is, it is where the function is run and the variable is declared. The default execution context is the global context. As whenever the function is executed, it creates its own execution context. The function execution context is put on top of the global context.
+      </p>
+      <h4>Execution stack</h4>
+      <p>
+        The execution stack is multiple contexts placed on top of each other. The execution context at the top will be run first. Once it is done, it will be popped off the stack.
+      </p>
+    </section>
+    <section class="main-section" id="Execution_Context_in_Details">
+      <header >
+        <h3>Execution Context in Details</h3>
+      </header>
+      <p>
+        The execution context is associated with an object such as window object in browswers.
+      </p>
+      <h4>The Object</h4>
+      <p>
+        The object has 3 properties.
+      </p>
+      <ul>
+        <li>Variable Object</li>
+        <li>Scope chain</li>
+        <li>"this" Variable </li>
+      </ul>
+      <h4>2 Phases</h4>
+      <p>
+        When a function is called, a new execution context is put on top of the previous one. This happens in 2 phases:
+      </p>
+      <ul>
+        <li>Creation Phase </li>
+        <li>Execution Phase</li>
+      </ul>
+    </section>
+    <section class="main-section" id="Creation_Phase_in_Details">
+      <header >
+        <h3>Creation Phase in Details</h3>
+      </header>
+      <h4>Creation of variable object </h4>
+      <p>
+        The argument object is created for function declarations. Undefined vaalue is assigned to variable declarations.
+      </p>
+      <p>
+        Hoisting is that the function declaration and undefined for variable declaration is available before the execution phase starts
+      </p>
+      <p>
+        Example Codes:
+      </p>
+      <code>
+        // functions <br>
+        calculateAge(1965); <br>
+        function calculateAge(year) { <br>
+            console.log(2016 - year); <br>
+        }<br>
+      </code>
+      <p class="output">
+        Output for the above code is 49.
+      </p>
+      <code>
+        retirement(1956); <br>
+        var retirement = function(year) { <br>
+        console.log(65 - (2016 - year)); <br>
+        } <br>
+      </code>
+      <p class="output">
+        Output for the above code is an error message.
+      </p>
+      <code>
+        // variables <br>
+        console.log(age); <br>
+        var age = 23; <br>
+      </code>
+      <p class="output">
+        Output for the above code is undefined.
+      </p>
+      </section >
+    <section class="main-section" id="Scope_Chain">
+      <header >
+        <h3>Scope Chain</h3>
+      </header>
+      <h4>Creation of scope chain </h4>
+      <p>
+        Beside the global scope ( default scope), JavaScript only creates a new scope when a function is declared. The scope chain is that where the variable is declared affect which function can gain access to it. In other words, the children functions can gain access to variables of its parent functions, and it is not the other way around.
+      </p>
+      <p>
+        Example Codes:
+      </p>
+      <code>
+        // First scoping example <br>
+        var a = 'Hello!'; <br>
+        first(); <br>
+        function first() { <br>
+        var b = 'Hi!'; <br>
+        second(); <br>
+        function second() { <br>
+        var c = 'Hey!'; <br>
+        console.log(a + b + c); <br>
+        }<br>
+        }<br>
+      </code>
+      <p class="output">
+        Output for the above code is "Hello! Hi! Hey!".
+      </p>
+      <p>
+        Execution stack is different from scope chain. The execution stack indicates what order in which the execution context is executed, or the order of execution of function. The scope chain indicates which variable the function can get access to. This largely depends on where the variables are declared.
+      </p>
+      <p>
+        Example Codes:
+      </p>
+      <code>
+        // Example to show the differece between execution stack and scope chain <br>
+        var a = 'Hello!'; <br>
+        first(); <br>
+        function first() { <br>
+        var b = 'Hi!'; <br>
+        second(); <br>
+        function second() { <br>
+        var c = 'Hey!'; <br>
+        third(); <br>
+        } <br>
+        } <br>
+        function third() { <br>
+        var d = 'John'; <br>
+        console.log(c); <br>
+        } <br>
+      </code>
+      <p class="output">
+        Output of the above code is an error message.
+      </p>
+      <h4>"This" variable is determined and set </h4>
+      <p>
+        There are three rules about "this" variable.
+      </p>
+      <ul>
+        <li>
+          This keyword is not assigned a value until the function is called. In other words, this keyword is attached to the execution context.
+        </li>
+        <li>
+          This keyword points to global object such as window object in regular function call.
+        </li>
+        <li>
+          This keyword points to the parent object in a method call.
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+  &copy;2020 by Huyen Nguyen
+  </footer>
+  <script src="index.js"></script>
+  <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
